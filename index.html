@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Madame Whisper — Every great mind leaves an echo</title>
+<meta name="description" content="Name anyone. She will fetch them. Madame Whisper summons the great minds of history and fiction for a conversation you can argue with. Coming soon.">
+<meta property="og:title" content="Madame Whisper">
+<meta property="og:description" content="Name anyone. She will fetch them. Coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://madamewhisper.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   MADAME WHISPER — coming-soon show bill.
+   Sun-bleached cream stock, one warm-black ink, engraved emblems.
+
+   HYBRID TYPE (design.md §3): display type is RASTERISED from the
+   real Windows faces (Wide Latin / Engravers MT / Bodoni MT) as
+   assets/type-*.webp, so the masthead is pixel-exact everywhere.
+   Body copy is live text in open-licensed webfonts so it reflows,
+   stays selectable, and is readable on a phone.
+   ───────────────────────────────────────────────────────────── */
+
+:root{
+  --paper:#efe3c8;
+  --paper-deep:#e4d5b4;
+  --ink:#1b1610;          /* warm near-black; never #000 on aged stock */
+  --ink-soft:#5b4c39;
+  --rule:#3a2f22;
+
+  --f-body:"Libre Baskerville",Georgia,serif;
+  --f-label:"Cinzel",Georgia,serif;
+
+  --col:62rem;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  color:var(--ink);
+  background-color:var(--paper);
+  /* sun-bleaching + foxing, faked in CSS until the texture plate lands */
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(255,252,240,.85) 0%, rgba(255,252,240,0) 60%),
+    radial-gradient(90% 60% at 8% 22%,  rgba(196,166,116,.20) 0%, rgba(196,166,116,0) 55%),
+    radial-gradient(80% 55% at 95% 62%, rgba(178,146,96,.22)  0%, rgba(178,146,96,0)  55%),
+    radial-gradient(70% 50% at 20% 92%, rgba(168,138,92,.18)  0%, rgba(168,138,92,0)  60%);
+  background-attachment:fixed;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{max-width:100%;height:auto;display:block}
+/* every black plate dissolves its white ground into the paper */
+.ink{mix-blend-mode:multiply}
+
+.wrap{max-width:var(--col);margin:0 auto;padding:0 1.4rem}
+
+/* ── the poster frame ─────────────────────────────────────── */
+.poster{
+  position:relative;
+  border:3px double var(--rule);
+  margin:1.6rem auto 2.4rem;
+  padding:clamp(1.4rem,4vw,3rem) clamp(1rem,3.5vw,2.6rem);
+}
+.poster::before{
+  content:"";position:absolute;inset:6px;border:1px solid var(--rule);
+  pointer-events:none;
+}
+.cnr{position:absolute;width:clamp(46px,7vw,104px);z-index:2;mix-blend-mode:multiply}
+.cnr.tl{top:10px;left:10px}
+.cnr.tr{top:10px;right:10px;transform:scaleX(-1)}
+.cnr.bl{bottom:10px;left:10px;transform:scaleY(-1)}
+.cnr.br{bottom:10px;right:10px;transform:scale(-1,-1)}
+
+/* ── rasterised display type ──────────────────────────────── */
+.type{margin:0 auto;mix-blend-mode:multiply}
+.type--masthead{width:min(100%,44rem)}
+.type--cabinet{width:min(100%,26rem)}
+.type--soon{width:min(100%,17rem)}
+.type--beats{width:min(100%,15rem)}
+
+.ornrule{margin:1.1rem auto;width:min(80%,22rem);mix-blend-mode:multiply}
+.ornrule--wide{width:min(90%,30rem)}
+
+/* ── masthead ─────────────────────────────────────────────── */
+.masthead{text-align:center}
+.orb{width:clamp(54px,8vw,90px);margin:0 auto .6rem;mix-blend-mode:multiply}
+
+.hero{
+  width:min(100%,30rem);
+  margin:1.4rem auto .4rem;
+  mix-blend-mode:multiply;
+}
+
+/* ── section furniture ────────────────────────────────────── */
+section{padding:1.7rem 0}
+.sect-head{text-align:center;margin-bottom:1.6rem}
+
+.kicker{
+  font-family:var(--f-label);
+  font-size:.78rem;letter-spacing:.34em;text-indent:.34em;
+  text-transform:uppercase;color:var(--ink-soft);
+}
+
+/* ── the three beats ──────────────────────────────────────── */
+.beats{max-width:34rem;margin:0 auto}
+.beat{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.beat .n{
+  flex:none;font-family:var(--f-label);font-weight:600;
+  font-size:1.05rem;line-height:1;
+  width:2rem;height:2rem;border:1.5px solid var(--rule);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:.15rem;
+}
+.beat h3{
+  font-family:var(--f-label);font-weight:600;
+  font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.beat p{font-size:.95rem}
+.beat em{color:var(--ink-soft)}
+
+/* ── story panel ──────────────────────────────────────────── */
+.story{
+  max-width:38rem;margin:0 auto;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:1.5rem .2rem;
+  font-size:1.02rem;
+}
+.story .drop{
+  float:left;font-family:var(--f-label);font-weight:600;
+  font-size:3.2rem;line-height:.86;margin:.28rem .6rem 0 0;
+}
+
+/* ── the cabinet ──────────────────────────────────────────── */
+.cabinet-art{width:min(100%,12rem);margin:0 auto 1rem;mix-blend-mode:multiply}
+/* Flex, not grid: seven is an odd count, and a grid strands the last card at the
+   left of an empty row. Wrapping flex centres the short row instead. */
+.cast{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:2rem 1.6rem;
+  max-width:54rem;margin:0 auto;
+}
+.mind{text-align:center;flex:0 1 15rem}
+.mind figure{
+  width:9.2rem;height:9.2rem;margin:0 auto .75rem;
+  border-radius:50%;
+  border:2px solid var(--rule);
+  box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--rule);
+  overflow:hidden;
+}
+.mind figure img{width:100%;height:100%;object-fit:cover}
+.mind h4{
+  font-family:var(--f-label);font-weight:600;
+  font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;
+  line-height:1.3;
+}
+.mind .where{
+  font-size:.76rem;font-style:italic;color:var(--ink-soft);
+  margin:.15rem 0 .4rem;
+}
+.mind p{font-size:.86rem;line-height:1.5;max-width:19rem;margin:0 auto}
+
+.more{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem;
+  margin-top:2.2rem;text-align:center;
+}
+.more img{width:2.6rem;mix-blend-mode:multiply}
+.more img.flip{transform:scaleX(-1)}
+.more span{font-family:var(--f-label);font-weight:600;font-size:1.05rem}
+
+/* ── coming soon ──────────────────────────────────────────── */
+.soon{text-align:center}
+.soon .lede{max-width:34rem;margin:1rem auto 1.6rem;font-size:1rem}
+
+.signup{
+  max-width:30rem;margin:0 auto;
+  border:3px double var(--rule);padding:1.4rem 1.2rem;
+  background:rgba(228,213,180,.45);
+}
+.signup label{
+  display:block;font-family:var(--f-label);font-weight:600;
+  font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+.signup .row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
+.signup input{
+  flex:1 1 14rem;min-width:0;
+  font-family:var(--f-body);font-size:.95rem;
+  padding:.7rem .8rem;
+  border:1px solid var(--rule);background:#fbf6e9;color:var(--ink);
+}
+.signup .btn{
+  font-family:var(--f-label);font-weight:600;
+  font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.72rem 1.3rem;
+  border:1px solid var(--rule);background:var(--ink);color:var(--paper);
+  cursor:pointer;text-decoration:none;display:inline-block;
+}
+.signup .btn:hover{background:var(--rule)}
+.signup .fine{font-size:.74rem;color:var(--ink-soft);margin-top:.8rem;font-style:italic}
+
+/* ── footer ───────────────────────────────────────────────── */
+.pull{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.2rem;
+  margin:2.6rem auto 1.6rem;text-align:center;
+}
+.pull img{width:2.4rem;mix-blend-mode:multiply}
+.pull span{font-family:var(--f-label);font-weight:600;font-size:1.25rem;line-height:1.35}
+
+footer{
+  border-top:1px solid var(--rule);
+  margin-top:1.4rem;padding:1.4rem 0 2.6rem;text-align:center;
+}
+.disclosure{
+  font-size:.8rem;font-style:italic;color:var(--ink-soft);
+  max-width:34rem;margin:0 auto .9rem;
+}
+.engine{font-size:.82rem;color:var(--ink-soft);margin-bottom:1rem}
+.engine a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.url{
+  font-family:var(--f-label);font-weight:600;
+  font-size:.9rem;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;
+}
+
+@media (max-width:640px){
+  .beat{gap:.75rem}
+  .mind figure{width:8rem;height:8rem}
+  .pull{gap:.7rem}
+  .pull span{font-size:1.05rem}
+  .more img{width:2rem}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="poster">
+  <img class="cnr tl" src="assets/orn/corner.webp" alt="">
+  <img class="cnr tr" src="assets/orn/corner.webp" alt="">
+  <img class="cnr bl" src="assets/orn/corner.webp" alt="">
+  <img class="cnr br" src="assets/orn/corner.webp" alt="">
+
+  <!-- ══ masthead ══ -->
+  <header class="masthead">
+    <img class="orb" src="assets/mark-orb-print.webp" alt="">
+    <img class="type type--masthead" src="assets/type-masthead.webp"
+         alt="The Parlour of Madame Whisper — every great mind leaves an echo">
+    <img class="ornrule" src="assets/orn/rule-scroll.webp" alt="">
+    <img class="hero" src="assets/hero-medium-print.webp"
+         alt="A Victorian medium at her table, hands around a crystal ball, three faces forming in the rising smoke">
+  </header>
+
+  <!-- ══ the three beats ══ -->
+  <section>
+    <div class="sect-head">
+      <img class="type type--beats" src="assets/type-beats.webp" alt="How the séance is held">
+    </div>
+    <div class="beats">
+      <div class="beat">
+        <span class="n">I</span>
+        <div>
+          <h3>Name your guest</h3>
+          <p><em>“I should like to speak with Machiavelli.”</em></p>
+        </div>
+      </div>
+      <div class="beat">
+        <span class="n">II</span>
+        <div>
+          <h3>She parts the veil</h3>
+          <p>The smoke gathers. The Madame does her work. Your guest arrives.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <span class="n">III</span>
+        <div>
+          <h3>Then you simply talk</h3>
+          <p>Argue with them. Scheme with them. Ask what they never wrote down.
+             They answer in their own voice — not from a script.</p>
+        </div>
+      </div>
+    </div>
+
+    <img class="ornrule ornrule--wide" src="assets/orn/rule-star.webp" alt="">
+
+    <p class="story">
+      <span class="drop">Y</span>ou have read what they wrote. You have argued with them in your head
+      on the walk home. Madame Whisper is that argument with the other chair filled — by a Florentine
+      schemer, by a general who won before the fighting started, by a philosopher who will not let a
+      loose definition pass. Name anyone. She will fetch them.
+    </p>
+  </section>
+
+  <!-- ══ the cabinet ══ -->
+  <section id="cabinet">
+    <div class="sect-head">
+      <img class="cabinet-art" src="assets/cabinet-print.webp" alt="">
+      <img class="type type--cabinet" src="assets/type-cabinet.webp" alt="Presenting the Cabinet of Minds">
+    </div>
+
+    <div class="cast">
+      <div class="mind">
+        <figure><img src="assets/cameo/aristotle.webp" alt="Aristotle"></figure>
+        <h4>Aristotle</h4>
+        <div class="where">Athens · 335 BC</div>
+        <p>Bring him a question you think you have settled. He will take it apart into the four
+           things you actually meant.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/machiavelli.webp" alt="Niccolò Machiavelli"></figure>
+        <h4>Niccolò Machiavelli</h4>
+        <div class="where">Florence · 1513</div>
+        <p>Argue power with the man who wrote the book on it. He will not flatter you, and he will
+           not pretend the question is easy.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/suntzu.webp" alt="Sun Tzu"></figure>
+        <h4>Sun Tzu</h4>
+        <div class="where">The state of Wu · 5th c. BC</div>
+        <p>Bring him a conflict — a campaign, a rivalry, a negotiation. He will show you where it was
+           decided, long before the fighting.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/plato.webp" alt="Plato"></figure>
+        <h4>Plato of Athens</h4>
+        <div class="where">The Academy · 380 BC</div>
+        <p>Ask him what a thing really is. Then discover you have agreed to something you did not
+           intend, three questions ago.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/alexander.webp" alt="Alexander the Great"></figure>
+        <h4>Alexander the Great</h4>
+        <div class="where">Babylon · 323 BC</div>
+        <p>He had the world at thirty and no idea what to do next. Ask him whether it was worth
+           what it cost.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/franklin.webp" alt="Benjamin Franklin"></figure>
+        <h4>Benjamin Franklin</h4>
+        <div class="where">Philadelphia · 1776</div>
+        <p>Printer, diplomat, and the most useful man in any room. Ask him how to get something
+           difficult agreed to.</p>
+      </div>
+
+      <div class="mind">
+        <figure><img src="assets/cameo/jung.webp" alt="Carl Jung"></figure>
+        <h4>Carl Jung</h4>
+        <div class="where">Küsnacht · 1935</div>
+        <p>Tell him the dream you still remember. He will want to know what you have refused to
+           look at.</p>
+      </div>
+    </div>
+
+    <div class="more">
+      <img src="assets/orn/manicule.webp" alt="">
+      <span>…and anyone else you care to name.</span>
+      <img class="flip" src="assets/orn/manicule.webp" alt="">
+    </div>
+  </section>
+
+  <!-- ══ coming soon ══ -->
+  <section class="soon" id="seat">
+    <img class="ornrule ornrule--wide" src="assets/orn/rule-orb.webp" alt="">
+    <img class="type type--soon" src="assets/type-soon.webp" alt="Coming soon">
+
+    <p class="lede">
+      The parlour is not yet open. Leave word and you will be told the evening it is —
+      and Founding Members will be seated first.
+    </p>
+
+    <!-- ⚠ ENDPOINT NOT WIRED (design.md §6). A static page cannot receive a post.
+         To enable: create a Formspree or Buttondown form and set action="…" + method="post",
+         then delete the mailto button below and uncomment the submit button. -->
+    <div class="signup">
+      <label for="em">Leave word at the parlour</label>
+      <div class="row">
+        <input id="em" type="email" name="email" placeholder="your address" autocomplete="email">
+        <a class="btn" id="send"
+           href="mailto:sales@madamewhisper.com?subject=A%20seat%20in%20the%20parlour&amp;body=Please%20tell%20me%20when%20Madame%20Whisper%20opens.">Send word</a>
+        <!-- Real list later: set action/method on a <form> here (Formspree or Buttondown,
+             design.md §6) and swap this anchor for <button class="btn" type="submit">. -->
+      </div>
+      <p class="fine">No product exists yet. You are joining a list, not buying a thing.</p>
+    </div>
+
+    <div class="pull">
+      <img src="assets/orn/star8.webp" alt="">
+      <span>“The dead are gone.<br>Their ideas are not.”</span>
+      <img src="assets/orn/star8.webp" alt="">
+    </div>
+  </section>
+
+  <footer>
+    <p class="disclosure">
+      Madame Whisper makes no claim to raise the dead. Every guest is an AI reconstruction, built
+      from what they actually wrote and said — an echo, not a resurrection.
+    </p>
+    <p class="engine">
+      Built on the persona engine behind <a href="https://deliberon.com">Deliberon</a>.
+    </p>
+    <div class="url">madamewhisper.com</div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+/* The address box has no server behind it yet, so rather than let it be a dead
+   control it composes the mail for you. Without JS the button is still a plain
+   working mailto. */
+(function(){
+  var box=document.getElementById('em'), btn=document.getElementById('send');
+  if(!box||!btn) return;
+  function sync(){
+    var v=box.value.trim();
+    btn.href='mailto:sales@madamewhisper.com'
+      +'?subject='+encodeURIComponent('A seat in the parlour')
+      +'&body='+encodeURIComponent(
+          'Please tell me when Madame Whisper opens.'
+          +(v?'\n\nMy address: '+v:''));
+  }
+  box.addEventListener('input',sync);
+  box.addEventListener('keydown',function(e){ if(e.key==='Enter'){ sync(); btn.click(); }});
+  sync();
+})();
+</script>
+</body>
+</html>
