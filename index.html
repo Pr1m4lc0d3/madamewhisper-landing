@@ -446,7 +446,7 @@ footer{
 
 <script>
 /* Until the Kit form URL is filled into action=, submitting composes a mail to
-   sales@ instead, so the control always does something. Once action is set this
+   madame@ instead, so the control always does something. Once action is set this
    steps aside entirely and the form posts normally. */
 (function(){
   var form=document.getElementById('signupForm');
@@ -455,7 +455,7 @@ footer{
     if(form.getAttribute('action')) return;      // wired to Kit — let it post
     e.preventDefault();
     var v=(document.getElementById('em')||{}).value||'';
-    window.location.href='mailto:sales@madamewhisper.com'
+    window.location.href='mailto:madame@madamewhisper.com'
       +'?subject='+encodeURIComponent('A seat in the parlour')
       +'&body='+encodeURIComponent(
           'Please tell me when Madame Whisper opens.'
