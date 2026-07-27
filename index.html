@@ -398,24 +398,30 @@ footer{
     <img class="type type--soon" src="assets/type-soon.webp" alt="Coming soon">
 
     <p class="lede">
-      The parlour is not yet open. Leave word and you will be told the evening it is —
-      and Founding Members will be seated first.
+      The parlour is not yet open. Leave your card and you will be sent word the evening it is —
+      before it is announced anywhere else. Founding Members are seated first, and there are
+      only so many chairs.
     </p>
 
     <!-- ⚠ ENDPOINT NOT WIRED (design.md §6). A static page cannot receive a post.
          To enable: create a Formspree or Buttondown form and set action="…" + method="post",
          then delete the mailto button below and uncomment the submit button. -->
-    <div class="signup">
-      <label for="em">Leave word at the parlour</label>
+    <!-- TO GO LIVE ON KIT: put the form's post URL in action= below. Nothing else
+         changes — the field is already named email_address, which is what Kit expects.
+         While action is empty the script falls back to composing a mail, so the
+         button is never dead. -->
+    <form class="signup" id="signupForm" method="post" action="">
+      <label for="em">Tell me when the parlour opens</label>
       <div class="row">
-        <input id="em" type="email" name="email" placeholder="your address" autocomplete="email">
-        <a class="btn" id="send"
-           href="mailto:sales@madamewhisper.com?subject=A%20seat%20in%20the%20parlour&amp;body=Please%20tell%20me%20when%20Madame%20Whisper%20opens.">Send word</a>
-        <!-- Real list later: set action/method on a <form> here (Formspree or Buttondown,
-             design.md §6) and swap this anchor for <button class="btn" type="submit">. -->
+        <input id="em" type="email" name="email_address" placeholder="your address"
+               autocomplete="email" required>
+        <button class="btn" type="submit">Send word</button>
       </div>
-      <p class="fine">No product exists yet. You are joining a list, not buying a thing.</p>
-    </div>
+      <p class="fine" id="signupNote">
+        No product exists yet — you are joining a list, not buying a thing.
+        One message when the doors open, and nothing else.
+      </p>
+    </form>
 
     <div class="pull">
       <img src="assets/orn/star8.webp" alt="">
@@ -439,23 +445,22 @@ footer{
 </div>
 
 <script>
-/* The address box has no server behind it yet, so rather than let it be a dead
-   control it composes the mail for you. Without JS the button is still a plain
-   working mailto. */
+/* Until the Kit form URL is filled into action=, submitting composes a mail to
+   sales@ instead, so the control always does something. Once action is set this
+   steps aside entirely and the form posts normally. */
 (function(){
-  var box=document.getElementById('em'), btn=document.getElementById('send');
-  if(!box||!btn) return;
-  function sync(){
-    var v=box.value.trim();
-    btn.href='mailto:sales@madamewhisper.com'
+  var form=document.getElementById('signupForm');
+  if(!form) return;
+  form.addEventListener('submit',function(e){
+    if(form.getAttribute('action')) return;      // wired to Kit — let it post
+    e.preventDefault();
+    var v=(document.getElementById('em')||{}).value||'';
+    window.location.href='mailto:sales@madamewhisper.com'
       +'?subject='+encodeURIComponent('A seat in the parlour')
       +'&body='+encodeURIComponent(
           'Please tell me when Madame Whisper opens.'
-          +(v?'\n\nMy address: '+v:''));
-  }
-  box.addEventListener('input',sync);
-  box.addEventListener('keydown',function(e){ if(e.key==='Enter'){ sync(); btn.click(); }});
-  sync();
+          +(v.trim()?'\n\nMy address: '+v.trim():''));
+  });
 })();
 </script>
 </body>
