@@ -224,6 +224,14 @@ section{padding:1.7rem 0}
 .signup .btn:hover{background:var(--rule)}
 .signup .fine{font-size:.74rem;color:var(--ink-soft);margin-top:.8rem;font-style:italic}
 
+/* arrival state after Kit redirects back with ?seated=1 */
+.signup.seated{text-align:center}
+.seated-head{
+  font-family:var(--f-label);font-weight:600;
+  font-size:1.15rem;letter-spacing:.06em;margin-bottom:.5rem;
+}
+.seated-body{font-size:.92rem;line-height:1.55;max-width:26rem;margin:0 auto}
+
 /* ── footer ───────────────────────────────────────────────── */
 .pull{
   display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.2rem;
@@ -406,11 +414,11 @@ footer{
     <!-- ⚠ ENDPOINT NOT WIRED (design.md §6). A static page cannot receive a post.
          To enable: create a Formspree or Buttondown form and set action="…" + method="post",
          then delete the mailto button below and uncomment the submit button. -->
-    <!-- TO GO LIVE ON KIT: put the form's post URL in action= below. Nothing else
-         changes — the field is already named email_address, which is what Kit expects.
-         While action is empty the script falls back to composing a mail, so the
-         button is never dead. -->
-    <form class="signup" id="signupForm" method="post" action="">
+    <!-- Kit inline form 9730404. On success Kit redirects back to /?seated=1 rather
+         than to its own hosted page, and the script below swaps in the arrival note.
+         Double opt-in is on, so a subscriber is pending until they confirm. -->
+    <form class="signup" id="signupForm" method="post"
+          action="https://app.kit.com/forms/9730404/subscriptions">
       <label for="em">Tell me when the parlour opens</label>
       <div class="row">
         <input id="em" type="email" name="email_address" placeholder="your address"
@@ -451,8 +459,23 @@ footer{
 (function(){
   var form=document.getElementById('signupForm');
   if(!form) return;
+
+  /* Kit sends subscribers back here with ?seated=1. Swap the form for the
+     arrival note so the moment of conversion still sounds like the parlour. */
+  if(/[?&]seated=1\b/.test(location.search)){
+    form.innerHTML =
+      '<p class="seated-head">Your card is received.</p>'+
+      '<p class="seated-body">Look for a note asking you to confirm — the Madame '+
+      'does not admit a name she cannot verify. Once you answer it, you will be '+
+      'sent word the evening the parlour opens.</p>';
+    form.classList.add('seated');
+    if(history.replaceState) history.replaceState(null,'',location.pathname);
+  }
+
+  /* Belt and braces: if action is ever cleared, compose a mail rather than
+     leaving a dead button. */
   form.addEventListener('submit',function(e){
-    if(form.getAttribute('action')) return;      // wired to Kit — let it post
+    if(form.getAttribute('action')) return;
     e.preventDefault();
     var v=(document.getElementById('em')||{}).value||'';
     window.location.href='mailto:madame@madamewhisper.com'
