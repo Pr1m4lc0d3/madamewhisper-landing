@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) — must stay INLINE here. Injecting it at runtime makes
+     GA's verification report "code not detected" (learned on ideaforgepro.com). -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B1RPBTTTSP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B1RPBTTTSP');
+  /* The signup leaves for Kit and returns to /?seated=1, so that parameter is a
+     reliable subscribe signal. Fire it before the script below strips the param. */
+  if (/[?&]seated=1\b/.test(location.search)) {
+    gtag('event', 'signup_complete', { method: 'kit', form_id: '9730404' });
+  }
+</script>
 <title>Madame Whisper — Every great mind leaves an echo</title>
 <meta name="description" content="Name anyone. She will fetch them. Madame Whisper summons the great minds of history and fiction for a conversation you can argue with. Coming soon.">
 <meta property="og:title" content="Madame Whisper">
@@ -248,7 +262,12 @@ footer{
   font-size:.8rem;font-style:italic;color:var(--ink-soft);
   max-width:34rem;margin:0 auto .9rem;
 }
-.engine{font-size:.82rem;color:var(--ink-soft);margin-bottom:1rem}
+.engine{font-size:.82rem;color:var(--ink-soft);margin-bottom:.9rem}
+.ledger{
+  font-size:.74rem;line-height:1.55;color:var(--ink-soft);
+  max-width:34rem;margin:0 auto 1rem;
+}
+.ledger strong{font-weight:400;font-style:italic;color:var(--ink)}
 .engine a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .url{
   font-family:var(--f-label);font-weight:600;
@@ -445,6 +464,12 @@ footer{
     </p>
     <p class="engine">
       Built on the persona engine behind <a href="https://deliberon.com">Deliberon</a>.
+    </p>
+    <p class="ledger">
+      <strong>A note on the ledger.</strong> This page counts visits with Google Analytics, which
+      sets a cookie and records where visitors arrived from. We do not know who you are and we sell
+      nothing to anyone. An address left above goes to Kit and is used for one thing — telling you
+      the parlour has opened.
     </p>
     <div class="url">madamewhisper.com</div>
   </footer>
