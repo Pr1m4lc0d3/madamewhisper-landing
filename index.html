@@ -9,6 +9,19 @@
 <meta property="og:description" content="Name anyone. She will fetch them. Coming soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://madamewhisper.com/">
+<meta property="og:site_name" content="Madame Whisper">
+<meta property="og:image" content="https://madamewhisper.com/assets/og-card.jpg?1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madame Whisper — a Victorian medium over her crystal ball, three faces rising in the smoke. Coming soon.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Madame Whisper">
+<meta name="twitter:description" content="Name anyone. She will fetch them. Coming soon.">
+<meta name="twitter:image" content="https://madamewhisper.com/assets/og-card.jpg?1">
+<meta name="theme-color" content="#efe3c8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -44,12 +57,11 @@ body{
   font-family:var(--f-body);
   color:var(--ink);
   background-color:var(--paper);
-  /* sun-bleaching + foxing, faked in CSS until the texture plate lands */
-  background-image:
-    radial-gradient(120% 80% at 50% -10%, rgba(255,252,240,.85) 0%, rgba(255,252,240,0) 60%),
-    radial-gradient(90% 60% at 8% 22%,  rgba(196,166,116,.20) 0%, rgba(196,166,116,0) 55%),
-    radial-gradient(80% 55% at 95% 62%, rgba(178,146,96,.22)  0%, rgba(178,146,96,0)  55%),
-    radial-gradient(70% 50% at 20% 92%, rgba(168,138,92,.18)  0%, rgba(168,138,92,0)  60%);
+  /* real sun-bleached stock. Fixed + cover so the sheet doesn't stretch as the
+     page grows; the colour underneath carries it if the image fails. */
+  background-image:url(assets/paper-texture.jpg);
+  background-size:cover;
+  background-position:center;
   background-attachment:fixed;
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
@@ -89,7 +101,11 @@ img{max-width:100%;height:auto;display:block}
 .ornrule--wide{width:min(90%,30rem)}
 
 /* ── masthead ─────────────────────────────────────────────── */
-.masthead{text-align:center}
+/* The curtain's centre is open, so the masthead is pulled up into the
+   opening rather than sitting below the drapes. */
+.curtain{width:100%;margin:-.4rem auto 0;mix-blend-mode:multiply}
+.masthead{text-align:center;margin-top:-13%;position:relative;z-index:1}
+@media (max-width:640px){ .masthead{margin-top:-11%} }
 .orb{width:clamp(54px,8vw,90px);margin:0 auto .6rem;mix-blend-mode:multiply}
 
 .hero{
@@ -177,6 +193,7 @@ section{padding:1.7rem 0}
 
 /* ── coming soon ──────────────────────────────────────────── */
 .soon{text-align:center}
+.seal{width:clamp(88px,13vw,132px);margin:.2rem auto .7rem;mix-blend-mode:multiply}
 .soon .lede{max-width:34rem;margin:1rem auto 1.6rem;font-size:1rem}
 
 .signup{
@@ -242,10 +259,12 @@ footer{
 
 <div class="wrap">
 <div class="poster">
-  <img class="cnr tl" src="assets/orn/corner.webp" alt="">
-  <img class="cnr tr" src="assets/orn/corner.webp" alt="">
+  <!-- top corners are omitted: the curtain valance already crowns the frame and
+       the flourishes collide with its ends -->
   <img class="cnr bl" src="assets/orn/corner.webp" alt="">
   <img class="cnr br" src="assets/orn/corner.webp" alt="">
+
+  <img class="curtain" src="assets/curtain.webp" alt="" onerror="this.remove()">
 
   <!-- ══ masthead ══ -->
   <header class="masthead">
@@ -372,6 +391,7 @@ footer{
   <!-- ══ coming soon ══ -->
   <section class="soon" id="seat">
     <img class="ornrule ornrule--wide" src="assets/orn/rule-orb.webp" alt="">
+    <img class="seal" src="assets/seal-comingsoon.webp" alt="" onerror="this.remove()">
     <img class="type type--soon" src="assets/type-soon.webp" alt="Coming soon">
 
     <p class="lede">
