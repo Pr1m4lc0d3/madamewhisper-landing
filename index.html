@@ -11,6 +11,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-B1RPBTTTSP');
+  // Roll-up property — the same id is on every site, so a visit that crosses
+  // domains stays ONE session instead of restarting as a new referral.
+  gtag('config', 'G-F7WLK0CG8X');
   /* The signup leaves for Kit and returns to /?seated=1, so that parameter is a
      reliable subscribe signal. Fire it before the script below strips the param. */
   if (/[?&]seated=1\b/.test(location.search)) {
