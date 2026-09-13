@@ -1,0 +1,5 @@
+# https://madamewhisper.com
+User-agent: *
+Allow: /
+
+Sitemap: https://madamewhisper.com/sitemap.xml
